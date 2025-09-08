@@ -3,19 +3,18 @@ import readlinesync = require("readline-sync");
 import { Roupas } from "./src/model/Roupas";
 import { Camiseta } from "./src/model/Camiseta";
 import { Vestido } from "./src/model/Vestido";
+import { RoupasController } from "./src/controller/RoupasController";
 
 
 export function main() {
     
 
+    //clase controller
+    let roupas: RoupasController = new RoupasController();
+    const tiposRoupas = ["Camiseta", "Vestido"];
 
-    const vestido1 = new Vestido(2, "Vestido Longo", "G", "Vermelho", 199.90, 50, "Seda", "Longo");
-    vestido1.visualizar();
-    const camiseta1 = new Camiseta(3, "Camiseta Polo", "P", "Azul", 89.90, 75, "Poliéster", "Manga Curta");
-    camiseta1.visualizar();
-
-
-    let opcao: number;
+    let opcao: number, id: number, preco: number, estoque: number, tipo: number;
+    let nome: string, tamanho: string, cor: string, material: string, estilomanga: string, comprimento: string;
 
     while(true){
     console.log(colors.bg.black, colors.fg.magentastrong,
@@ -47,13 +46,35 @@ export function main() {
             case 1:
                 console.log(colors.fg.whitestrong, 
                     "\n\nCadastrar roupa\n\n", colors.reset);
-                
+                console.log("Escolha o tipo de roupa:");
+                console.log("1 - Camiseta");
+                console.log("2 - Vestido");
+                tipo = readlinesync.questionInt("Tipo: ");
+
+                nome = readlinesync.question("Nome: ");
+                preco = readlinesync.questionFloat("Preço: ");
+                estoque = readlinesync.questionInt("Estoque: ");
+                tamanho = readlinesync.question("Tamanho: ");
+                cor = readlinesync.question("Cor: ");
+                material = readlinesync.question("Material: ");
+
+                if (tipo === 1) {
+                    estilomanga = readlinesync.question("Estilo da manga: ");
+                    const camiseta = new Camiseta(roupas.gerarNumero(), nome, tamanho, cor, preco, estoque, material, estilomanga);
+                    roupas.cadastrar(camiseta);
+                } else if (tipo === 2) {
+                    comprimento = readlinesync.question("Comprimento: ");
+                    const vestido = new Vestido(roupas.gerarNumero(), nome, tamanho, cor, preco, estoque, material, comprimento);
+                    roupas.cadastrar(vestido);
+                } else {
+                    console.log(colors.fg.redstrong, "Tipo de roupa inválido!", colors.reset);
+                }
                 keyPress()
                 break;
             case 2:
                 console.log(colors.fg.whitestrong, 
                     "\n\nListar todas as roupas\n\n", colors.reset);
-
+                roupas.listarTodas();
                 keyPress()
                 break;
             case 3:

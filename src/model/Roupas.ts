@@ -21,50 +21,50 @@ export abstract class Roupas {
     public get id(): number {
         return this._id;
     }
-    public set id(value: number) {
-        this._id = value;
+    public set id(id: number) {
+        this._id = id;
     }
 
     public get nome(): string {
         return this._nome;
     }
-    public set nome(value: string) {
-        this._nome = value;
+    public set nome(nome: string) {
+        this._nome = nome;
     }
 
     public get tamanho(): string {
         return this._tamanho;
     }
-    public set tamanho(value: string) {
-        this._tamanho = value;
+    public set tamanho(tamanho: string) {
+        this._tamanho = tamanho;
     }
 
     public get cor(): string {
         return this._cor;
     }
-    public set cor(value: string) {
-        this._cor = value;
+    public set cor(cor: string) {
+        this._cor = cor;
     }
 
     public get preco(): number {
         return this._preco;
     }
-    public set preco(value: number) {
-        this._preco = value;
+    public set preco(preco: number) {
+        this._preco = preco;
     }
 
     public get estoque(): number {
         return this._estoque;
     }
-    public set estoque(value: number) {
-        this._estoque = value;
+    public set estoque(estoque: number) {
+        this._estoque = estoque;
     }
 
     public get material(): string {
         return this._material;
     }
-    public set material(value: string) {
-        this._material = value;
+    public set material(material: string) {
+        this._material = material;
     }
 
     
