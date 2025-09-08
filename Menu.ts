@@ -1,9 +1,19 @@
 import { colors } from "./src/util/Colors";
 import readlinesync = require("readline-sync");
+import { Roupas } from "./src/model/Roupas";
+import { Camiseta } from "./src/model/Camiseta";
+import { Vestido } from "./src/model/Vestido";
 
 
 export function main() {
     
+
+
+    const vestido1 = new Vestido(2, "Vestido Longo", "G", "Vermelho", 199.90, 50, "Seda", "Longo");
+    vestido1.visualizar();
+    const camiseta1 = new Camiseta(3, "Camiseta Polo", "P", "Azul", 89.90, 75, "Poliéster", "Manga Curta");
+    camiseta1.visualizar();
+
 
     let opcao: number;
 
@@ -25,7 +35,7 @@ export function main() {
     console.log("Entre com a opção desejada: ");
         opcao = readlinesync.questionInt("");
 
-        if (opcao == 7) {
+        if (opcao == 0) {
             console.log(colors.fg.greenstrong, 
                 "\nLookStore agradece a sua visita!\n", colors.reset);
             sobre();
@@ -64,13 +74,7 @@ export function main() {
 
                 keyPress()
                 break;
-            case 6:
-                console.log(colors.fg.whitestrong, 
-                    "\n\nSair\n\n", colors.reset);
 
-                keyPress()
-                break;
-            
             default:
                 console.log(colors.fg.whitestrong, 
                     "\nOpção Inválida!\n", colors.reset);
