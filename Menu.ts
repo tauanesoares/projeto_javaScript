@@ -23,9 +23,9 @@ export function main() {
     console.log("===================================");
     console.log("1 - Cadastrar Roupa");
     console.log("2 - Listar Roupas");
-    console.log("3 - Atualizar Roupa");
-    console.log("4 - Excluir Roupa");
-    console.log("5 - Buscar Roupa por ID");
+    console.log("3 - Buscar Roupa por id");
+    console.log("4 - Atualizar Roupa");
+    console.log("5 - Excluir roupa");
     console.log("0 - Sair");
     console.log("===================================");
     console.log("                                                     ",
@@ -79,19 +79,59 @@ export function main() {
                 break;
             case 3:
                 console.log(colors.fg.whitestrong, 
-                    "\n\nAtualizar roupa\n\n", colors.reset);
+                    "\n\nConsultar roupas por id\n\n", colors.reset);
+                    console.log("Digite o id da roupa que deseja consultar: ");
+                    id = readlinesync.questionInt("Id: ");
+                    roupas.procurarPorNumero(id);
 
                 keyPress()
                 break;
             case 4:
-                console.log(colors.fg.whitestrong, 
-                    "\n\nExcluir roupa\n\n", colors.reset);
+                console.log(colors.fg.whitestrong, "\n\nAtualizar dados da Roupa\n\n", colors.reset);
 
-                keyPress()
+                console.log("Digite o número da Roupa: ");
+                id = readlinesync.questionInt("");
+
+                let roupa = roupas.buscarNoArray(id);
+
+                if (roupa != null) {
+
+                    console.log(colors.fg.whitestrong, 
+                    "\n\nAtualizar roupa:\n\n", colors.reset);
+                    console.log("Escolha o tipo de roupa:");
+                    console.log("1 - Camiseta");
+                    console.log("2 - Vestido");
+                    tipo = readlinesync.questionInt("Tipo: ");
+                    nome = readlinesync.question("Nome: ");
+                    preco = readlinesync.questionFloat("Preço: ");
+                    estoque = readlinesync.questionInt("Estoque: ");
+                    tamanho = readlinesync.question("Tamanho: ");
+                    cor = readlinesync.question("Cor: ");
+                    material = readlinesync.question("Material: ");
+
+                    if (tipo === 1) {
+                    estilomanga = readlinesync.question("Estilo da manga: ");
+                    const camiseta = new Camiseta(roupas.gerarNumero(), nome, tamanho, cor, preco, estoque, material, estilomanga);
+                    roupas.atualizar(camiseta);
+                } else if (tipo === 2) {
+                    comprimento = readlinesync.question("Comprimento: ");
+                    const vestido = new Vestido(roupas.gerarNumero(), nome, tamanho, cor, preco, estoque, material, comprimento);
+                    roupas.atualizar(vestido);
+                } 
+                }else {
+                    console.log(colors.fg.red, "\nA Conta numero: " + id + " não foi encontrada!", colors.reset);
+                }
+
+                keyPress();
                 break;
+                
             case 5:
                 console.log(colors.fg.whitestrong, 
-                    "\n\nBuscar roupa por id\n\n", colors.reset);
+                    "\n\nExxcluir roupa\n\n", colors.reset);
+
+                console.log("Digite o id da roupa: ");
+                id = readlinesync.questionInt("");
+                roupas.deletar(id);
 
                 keyPress()
                 break;
